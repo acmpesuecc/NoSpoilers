@@ -7,4 +7,4 @@ requirements to run:
 -prettytable
 
 Do not forget to keep the NoSpoilersModules.py in the same directory as the GUI file.
-If the API is not working, register to the API at https://rapidapi.com/tvjan/api/tvmaze, and change the API key to your new registered key.
+If the API is not working, register to the API at https://rapidapi.com/tvjan/api/tvmaze and change the API key to your new registered key.
