@@ -126,38 +126,53 @@ menubar = Menu(master)
 wList = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Watchlist', menu=wList)
 wList.add_command(label='Open watchlist', command=open_top)
+
+
 def aboutns():
-    my_label = Label(master, text="NS stands for NoSpoilers and it is a program which is made by incorporating tkinter using python.No Spoilers is a simple GUI TV show search engine. Users can search and store TV shows in watchlists as well as get updates on new episodes of a certain show.") #creates a label to show about NS
-    my_label.pack()
-    master.after(10000, my_label.destroy) #to remove the info after 10 seconds
+    newWin = Toplevel(master)
+    newWin.configure(bg='red')
+
+    newWin.title("About NS")
+
+    newWin.geometry("250x250")#dimensions of help window
+
+    text = Text(newWin,wrap=WORD, bg='red', fg='white')#setting color of box and text
+
+    text.insert(INSERT,"NS stands for NoSpoilers and it is a program which is made by incorporating tkinter using python.No Spoilers is a simple GUI TV show search engine. Users can search and store TV shows in watchlists as well as get updates on new episodes of a certain show.")#command to put in the box
+    text.pack()
+    newWin.mainloop()
 help = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Help', menu=help)
-help.add_command(label='About NS', command= aboutns)#calls func aboutns
+help.add_command(label='About NS', command=aboutns)  # calls func aboutns
 
-label = Label(master, text='Enter the name of the show : ', bg='red', fg='white') # making the text white with a red bg
-label.place(x=50, y=20) # positioning the text
+label = Label(master, text='Enter the name of the show : ', bg='red', fg='white')  # making the text white with a red bg
+label.place(x=50, y=20)  # positioning the text
 
 query = StringVar()
 
 entry = Entry(master, textvariable=query, width=30)
-entry.place(x=210, y=20) # positioning the box
+entry.place(x=210, y=20)  # positioning the box
 
-search_button = Button(master, text='Search', command=search, height=1, width=6, bg='black', fg='white')# making the button black with white text
-search_button.place(x=275, y=40) # positioning the button
+search_button = Button(master, text='Search', command=search, height=1, width=6, bg='black',
+                       fg='white')  # making the button black with white text
+search_button.place(x=275, y=40)  # positioning the button
 
-addtowl_button = Button(master, text='Add to watchlist', command=search_again, height=1, width=15, bg='black', fg='white') # making the button black with white text
-addtowl_button.place(x=30, y=260)# positioning the button
+addtowl_button = Button(master, text='Add to watchlist', command=search_again, height=1, width=15, bg='black',
+                        fg='white')  # making the button black with white text
+addtowl_button.place(x=30, y=260)  # positioning the button
 
-schd_button = Button(master, text='Save watchlist', command=watchlist_save, height=1, width=15, bg='black', fg='white') # making the button black with white text
-schd_button.place(x=250, y=260)# positioning the button
+schd_button = Button(master, text='Save watchlist', command=watchlist_save, height=1, width=15, bg='black',
+                     fg='white')  # making the button black with white text
+schd_button.place(x=250, y=260)  # positioning the button
 
-quit_button = Button(master, text='Quit', command=quit_ns, bg='black', fg='white') # making the button black with white text
-quit_button.place(x=480, y=260)# positioning the button
+quit_button = Button(master, text='Quit', command=quit_ns, bg='black',
+                     fg='white')  # making the button black with white text
+quit_button.place(x=480, y=260)  # positioning the button
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=11, width=60)
-tb.textBox.place(x=30, y=75)# positioning the box
+tb.textBox.place(x=30, y=75)  # positioning the box
 
 load_watchlist()
 
