@@ -16,6 +16,12 @@ def inputQuery(query):
             'x-rapidapi-host': "tvjan-tvmaze-v1.p.rapidapi.com"
             }
         response = requests.request('GET', url, headers=headers)
+        check = 0
+        while check == 0:
+            if response == "":
+                response = requests.request('GET', url, headers=headers)
+            else:
+                check = 1
         lst = response.text.split('"')
         return lst
 
