@@ -6,6 +6,7 @@ import noSpoilersModules as nsm
 master = Tk()
 master.title("No Spoilers")
 master.geometry('600x400')
+master.configure(bg='#222')
 main_wl_list = []
 
 def search():
@@ -86,7 +87,7 @@ def watchlist_save():
         '''
         This function is to save the watchlist data
         '''
-        file = open('wlist.txt', 'a+')
+        file = open('wlist.txt', 'w')  #changed from a+ to w, so that the existing entries are not duplicated
         for i in main_wl_list:
                 file.write(', '.join(i) + '\n')
         file.close()
@@ -108,8 +109,10 @@ def load_watchlist():
         '''
         file = open('wlist.txt', 'r')
         for x in file:
-                a = x.split(', ')
+                temp = x.split('\n')  #remove the trailing newline if it exists
+                a = temp[0].split(', ')
                 mytable.add_row(a)
+                main_wl_list.append(a)  # this will load the saved watchlist as the program begins
 
 menubar = Menu(master)
 
@@ -121,32 +124,34 @@ help = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Help', menu = help)
 help.add_command(label = 'About NS', command = None)
 
-label = Label(master, text='Enter the name of the show')
+label = Label(master, text='Enter the name of the show',bg='#222',fg='white',font=("Poppins Bold",13))
 label.pack()
 
 query = StringVar()
 
-entry = Entry(master, textvariable=query)
-entry.pack()
+entry = Entry(master,width=40, textvariable=query,bg='#444',fg='white')
+entry.place(x=180,y=30)
 
-search_button = Button(master, text='Search', command = search)
-search_button.pack()
+search_button = Button(master, text='Search', command = search ,bg='#6ea3ba',fg='black',font=('Poppins',10))
+search_button.place(x=440,y=28)
 
-addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.pack()
+addtowl_button = Button(master,text='Add to watchlist', command = search_again ,bg='#6ea3ba',fg='black',font=('Poppins',10))
+addtowl_button.place(x=20,y=280)
 
-schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.pack()
 
-quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.pack()
+schd_button = Button(master, text='Save watchlist', command = watchlist_save,bg='#6ea3ba',fg='black',font=('Poppins',10))
+schd_button.place(x=150,y=280)
+
+quit_button = Button(master,width=5, text='Quit', command = quit_ns, bg='#ff1f48',fg='white',font=('Poppins',10,'bold'))
+quit_button.place(x=540,y=330)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
-tb.textBox = Text(master, height=10, width=60)
-tb.textBox.pack()
+tb.textBox = Text(master, height=10, width=72,bg='#444',fg='white')
+tb.textBox.place(x=10,y=70)
 
 load_watchlist()
 
 master.config(menu = menubar)
+master.resizable(width=False, height=False)
 master.mainloop()
