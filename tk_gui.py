@@ -5,8 +5,14 @@ import noSpoilersModules as nsm
 
 master = Tk()
 master.title("No Spoilers")
-master.geometry('600x400')
+master.configure(bg='red')
 main_wl_list = []
+master.resizable(False , False)  # disables resizeable feature of the window
+screen_width = master.winfo_screenwidth()  # fetches the display width
+screen_height = master.winfo_screenheight()  # fetches the display height
+x_cord = int((screen_width / 2) - (550 / 2))  # lines 12 & 13 determine the centre point on the screen
+y_cord = int((screen_height / 2) - (300 / 2))
+master.geometry(f"550x300+{x_cord}+{y_cord}")  # ensures the window pops up in the exact centre of the screen
 
 def search():
         '''
@@ -76,7 +82,7 @@ def open_top():
         top.title('Watchlist')
 
         textBox1 = Text(top, height=30, width=70)
-        textBox1.pack()
+        textBox1.place(x=0,y=0)
 
         textBox1.insert(END, mytable)
 
@@ -121,30 +127,30 @@ help = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Help', menu = help)
 help.add_command(label = 'About NS', command = None)
 
-label = Label(master, text='Enter the name of the show')
-label.pack()
+label = Label(master, text='Enter the name of the show : ', bg='red',fg='white')
+label.place(x=50, y=20)
 
 query = StringVar()
 
-entry = Entry(master, textvariable=query)
-entry.pack()
+entry = Entry(master, textvariable=query,width=30)
+entry.place(x=210,y=20)
 
-search_button = Button(master, text='Search', command = search)
-search_button.pack()
+search_button = Button(master, text='Search', command = search, height = 1, width = 6, bg='black',fg='white')
+search_button.place(x=400,y=17)
 
-addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.pack()
+addtowl_button = Button(master, text='Add to watchlist', command = search_again, bg='black',fg='white')
+addtowl_button.place(x=30,y=70)
 
-schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.pack()
+schd_button = Button(master, text='Save watchlist', command = watchlist_save, bg='black',fg='white')
+schd_button.place(x=250,y=70)
 
-quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.pack()
+quit_button = Button(master, text='Quit', command = quit_ns, bg='black',fg='white')
+quit_button.place(x=480,y=70)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=10, width=60)
-tb.textBox.pack()
+tb.textBox.place(x=30,y=100)
 
 load_watchlist()
 
