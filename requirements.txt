@@ -1,3 +1,4 @@
 pandas
 prettytable
 requests
+tkhtmlview

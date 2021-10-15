@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 from tkinter import *
 from tkinter import messagebox
 import noSpoilersModules as nsm
+from tkhtmlview import HTMLLabel
 
 master = Tk()
 master.title("No Spoilers")
@@ -111,6 +112,25 @@ def load_watchlist():
                 a = x.split(', ')
                 mytable.add_row(a)
 
+def show_about():
+        window=Tk()
+        window.title('About')
+        window.resizeab
+        window.config(padx = 10, pady = 10)
+        window.geometry("600x400")
+        # lbl=Label(window, text="No Spoilers is a simple GUI TV show search engine. \nUsers can search and store TV shows in watchlists as well as get\n updates on new episodes of a certain show.", font = ("Courier", 9))
+        # lbl.place(x=70, y=20)   
+        html_label=HTMLLabel(window, html="""
+                <a href='https://github.com/AdithyaPadmashali/NoSpoilers'>NoSpoilers</a><br>
+
+                A simple GUI TV show search engine. <br>
+                Users can search and store TV shows in watchlists as well as get<br>
+                updates on new episodes of a certain show.
+
+                <img src = ''>
+        """)
+        html_label.place(x = 10, y = 10)
+
 menubar = Menu(master)
 
 wList = Menu(menubar, tearoff=0)
@@ -119,7 +139,7 @@ wList.add_command(label = 'Open watchlist', command = open_top)
 
 help = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Help', menu = help)
-help.add_command(label = 'About NS', command = None)
+help.add_command(label = 'About NS', command = show_about)
 
 label = Label(master, text='Enter the name of the show')
 label.pack()
