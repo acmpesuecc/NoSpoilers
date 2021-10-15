@@ -18,7 +18,7 @@ def inputQuery(query):
         response = requests.request('GET', url, headers=headers)
         check = 0
         while check == 0:
-            if response == "":
+            if response == "" or response == None:
                 response = requests.request('GET', url, headers=headers)
             else:
                 check = 1
