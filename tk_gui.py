@@ -126,10 +126,13 @@ menubar = Menu(master)
 wList = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Watchlist', menu=wList)
 wList.add_command(label='Open watchlist', command=open_top)
-
+def aboutns():
+    my_label = Label(master, text="NS stands for NoSpoilers and it is a program which is made by incorporating tkinter using python.No Spoilers is a simple GUI TV show search engine. Users can search and store TV shows in watchlists as well as get updates on new episodes of a certain show.") #creates a label to show about NS
+    my_label.pack()
+    master.after(10000, my_label.destroy) #to remove the info after 10 seconds
 help = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Help', menu=help)
-help.add_command(label='About NS', command=None)
+help.add_command(label='About NS', command= aboutns)#calls func aboutns
 
 label = Label(master, text='Enter the name of the show : ', bg='red', fg='white') # making the text white with a red bg
 label.place(x=50, y=20) # positioning the text
