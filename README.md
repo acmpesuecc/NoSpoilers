@@ -16,6 +16,6 @@ You can install these requirements by running `pip install -r requirement.txt` o
 
 ### Rules to contribute
 
-Check out these Contributing Guidelines to learn more!
+Check out these [Contributing Guidelines](https://github.com/acmpesuecc/NoSpoilers/blob/main/CONTRIBUTION.md) to learn more!
 
 This repo is for the ACM PESU-ECC Hacknight 3.0 2021. If you require any help or have any queries, contact the maintainers.
