@@ -1,6 +1,8 @@
-from prettytable import PrettyTable
 from tkinter import *
 from tkinter import messagebox
+
+from prettytable import PrettyTable
+
 import noSpoilersModules as nsm
 
 master = Tk()
@@ -122,29 +124,29 @@ menubar.add_cascade(label='Help', menu = help)
 help.add_command(label = 'About NS', command = None)
 
 label = Label(master, text='Enter the name of the show')
-label.pack()
+label.grid(row=3,column=3)
 
 query = StringVar()
 
 entry = Entry(master, textvariable=query)
-entry.pack()
+entry.grid(row=4,column=3)
 
 search_button = Button(master, text='Search', command = search)
-search_button.pack()
+search_button.grid(row =5, column = 3)
 
 addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.pack()
+addtowl_button.grid(row = 20, column = 3)
 
 schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.pack()
+schd_button.grid(row = 21, column = 3)
 
 quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.pack()
+quit_button.grid(row = 25, column = 3)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=10, width=60)
-tb.textBox.pack()
+tb.textBox.grid(row = 7, column = 3)
 
 load_watchlist()
 
