@@ -23,20 +23,20 @@ def search():
 
         try:
                 res1 = list(nsm.scrape(res))
+                if len(res1) != 0 and len(res1) != 1:
+                        new_id = nsm.splitID(res1[1])
+                        temp = res1[2:5]
+                        search.res2 = [res1[0], new_id]
+                        for i in range(len(temp)):
+                                search.res2.append(temp[i])
+                        res3 = nsm.call(search.res2)
+                        tb(res3)
+                        
+                else:
+                        raise Exception('No data received for the given show')
         except Exception:
-                messagebox.showerror('Error', 'No data receieved for the given show')
-
-        if len(res1) == 0 or len(res1) == 1:
-                raise Exception('No data receieved for the given show')
-
-        new_id = nsm.splitID(res1[1])
-        temp = res1[2:5]
-
-        search.res2 = [res1[0], new_id]
-        for i in range(len(temp)):
-                search.res2.append(temp[i])
-        res3 = nsm.call(search.res2)
-        tb(res3)
+                messagebox.showerror('Error', 'No data received for the given show')
+        
 
 def search_again():
         '''
@@ -130,21 +130,21 @@ entry = Entry(master, textvariable=query)
 entry.pack()
 
 search_button = Button(master, text='Search', command = search)
-search_button.pack()
+search_button.place(x=50,y=70)
 
 addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.pack()
+addtowl_button.place(x=170,y=70)
 
 schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.pack()
+schd_button.place(x=350,y=70)
 
 quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.pack()
+quit_button.place(x=500,y=70)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=10, width=60)
-tb.textBox.pack()
+tb.textBox.place(x=60,y=150)
 
 load_watchlist()
 
