@@ -8,6 +8,7 @@ master.title("No Spoilers")
 master.geometry('600x400')
 master.configure(bg='#222')
 main_wl_list = []
+savedupto = 0
 
 def search():
         '''
@@ -87,10 +88,13 @@ def watchlist_save():
         '''
         This function is to save the watchlist data
         '''
+        global savedupto
+
         file = open('wlist.txt', 'a+')
-        for i in main_wl_list:
+        for i in main_wl_list[savedupto:]:
                 file.write(', '.join(i) + '\n')
         file.close()
+        savedupto = len(main_wl_list)
         messagebox.showwarning('Saved', 'Watchlist is saved!')
 
 def quit_ns():
