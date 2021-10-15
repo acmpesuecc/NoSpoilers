@@ -130,21 +130,21 @@ entry = Entry(master, textvariable=query)
 entry.pack()
 
 search_button = Button(master, text='Search', command = search)
-search_button.pack()
+search_button.place(x=50,y=70)
 
 addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.pack()
+addtowl_button.place(x=170,y=70)
 
 schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.pack()
+schd_button.place(x=350,y=70)
 
 quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.pack()
+quit_button.place(x=500,y=70)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=10, width=60)
-tb.textBox.pack()
+tb.textBox.place(x=60,y=150)
 
 load_watchlist()
 
