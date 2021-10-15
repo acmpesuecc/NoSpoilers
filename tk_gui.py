@@ -6,6 +6,8 @@ import noSpoilersModules as nsm
 master = Tk()
 master.title("No Spoilers")
 master.geometry('600x400')
+#change
+master.configure(bg = 'yellow')
 main_wl_list = []
 
 def search():
@@ -75,7 +77,8 @@ def open_top():
         top.geometry("525x500")
         top.title('Watchlist')
 
-        textBox1 = Text(top, height=30, width=70)
+#change
+        textBox1 = Text(top, height=50, width=100)
         textBox1.pack()
 
         textBox1.insert(END, mytable)
@@ -117,34 +120,37 @@ wList = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Watchlist', menu = wList)
 wList.add_command(label = 'Open watchlist', command = open_top)
 
-help = Menu(menubar, tearoff=0)
+#change
+help = Menu(menubar, background = 'yellow', fg = 'white', tearoff=0)
 menubar.add_cascade(label='Help', menu = help)
 help.add_command(label = 'About NS', command = None)
 
-label = Label(master, text='Enter the name of the show')
-label.pack()
+#change
+label = Label(master, background = 'light blue', text='Enter the name of the show')
+label.grid(column=1, row=1, padx=1, pady=5)
 
 query = StringVar()
 
 entry = Entry(master, textvariable=query)
-entry.pack()
+entry.grid(column=2, row=1, padx=0, pady=5)
 
-search_button = Button(master, text='Search', command = search)
-search_button.pack()
+#change
+search_button = Button(master, background = 'pink', text='Search', command = search)
+search_button.grid(column=1, row=2, padx=1, pady=5)
 
-addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.pack()
+addtowl_button = Button(master, background = 'pink', text='Add to watchlist', command = search_again)
+addtowl_button.grid(column=2, row=2, padx=1, pady=5)
 
-schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.pack()
+schd_button = Button(master, background = 'pink', text='Save watchlist', command = watchlist_save)
+schd_button.grid(column=1, row=3, padx=1, pady=5)
 
-quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.pack()
+quit_button = Button(master, background = 'pink', text='Quit', command = quit_ns)
+quit_button.grid(column=2, row=3, padx=1, pady=5)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
-tb.textBox = Text(master, height=10, width=60)
-tb.textBox.pack()
+tb.textBox = Text(master, height=10, width=40)
+tb.textBox.grid(column=1, row=4, padx=20, pady=5)
 
 load_watchlist()
 
