@@ -23,20 +23,20 @@ def search():
 
         try:
                 res1 = list(nsm.scrape(res))
+                if len(res1) != 0 and len(res1) != 1:
+                        new_id = nsm.splitID(res1[1])
+                        temp = res1[2:5]
+                        search.res2 = [res1[0], new_id]
+                        for i in range(len(temp)):
+                                search.res2.append(temp[i])
+                        res3 = nsm.call(search.res2)
+                        tb(res3)
+                        
+                else:
+                        raise Exception('No data received for the given show')
         except Exception:
-                messagebox.showerror('Error', 'No data receieved for the given show')
-
-        if len(res1) == 0 or len(res1) == 1:
-                raise Exception('No data receieved for the given show')
-
-        new_id = nsm.splitID(res1[1])
-        temp = res1[2:5]
-
-        search.res2 = [res1[0], new_id]
-        for i in range(len(temp)):
-                search.res2.append(temp[i])
-        res3 = nsm.call(search.res2)
-        tb(res3)
+                messagebox.showerror('Error', 'No data received for the given show')
+        
 
 def search_again():
         '''
