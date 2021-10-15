@@ -5,8 +5,13 @@ import noSpoilersModules as nsm
 
 master = Tk()
 master.title("No Spoilers")
-master.geometry('600x400')
 main_wl_list = []
+master.resizable(False , False)  # disables resizeable feature of the window
+screen_width = master.winfo_screenwidth()  # fetches the display width
+screen_height = master.winfo_screenheight()  # fetches the display height
+x_cord = int((screen_width / 2) - (550 / 2))  # lines 12 & 13 determine the centre point on the screen
+y_cord = int((screen_height / 2) - (300 / 2))
+master.geometry(f"550x300+{x_cord}+{y_cord}")  # ensures the window pops up in the exact centre of the screen
 
 def search():
         '''
@@ -76,9 +81,48 @@ def open_top():
         top.title('Watchlist')
 
         textBox1 = Text(top, height=30, width=70)
-        textBox1.pack()
+        textBox1.place(x=0,y=0)
 
         textBox1.insert(END, mytable)
+
+        top.mainloop()
+
+def open_about_NS():
+        '''
+        This function is to display About_NS
+        '''
+        top = Toplevel(master)
+        top.geometry("525x500")
+        top.title('About NS')
+
+        textBox1 = Text(top, height=30, width=70)
+        textBox1.place(x=0,y=0)
+
+        textBox1.insert(END, """No Spoilers is a simple GUI TV show search engine. 
+Users can search and store TV shows in watchlists as well 
+as get updates on new episodes of a certain show.
+
+Features of NoSpoilers:
+>The GUI of NS contains a entry widget where the user
+can enter a the exact name or keywords of the particular
+show that they want to search for.
+>The Search button will search for the show based on the 
+keywords entered by the user in the entry widget and will 
+display the search results in the text box on the GUI.
+>The add to watchlist button will result in adding the 
+show shown in the search results to a watchlist, which 
+can be viewed by clicking on Watchlist>Open watchlist. 
+>The Save watchlist button will ensure that the watchlist 
+is saved on the disk in the form a text file named as wlist.txt
+for referring to in the future, even after the program is closed.
+
+
+Requirements for No Spoilers:
+>pandas
+>prettytable
+>requests
+
+Repo source: git@github.com:acmpesuecc/NoSpoilers.git""")
 
         top.mainloop()
 
@@ -119,32 +163,32 @@ wList.add_command(label = 'Open watchlist', command = open_top)
 
 help = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Help', menu = help)
-help.add_command(label = 'About NS', command = None)
+help.add_command(label = 'About NS', command = open_about_NS)
 
 label = Label(master, text='Enter the name of the show')
-label.pack()
+label.place(x=50,y=20)
 
 query = StringVar()
 
-entry = Entry(master, textvariable=query)
-entry.pack()
+entry = Entry(master, textvariable=query,width=30)
+entry.place(x=230,y=20)
 
 search_button = Button(master, text='Search', command = search)
-search_button.pack()
+search_button.place(x=450,y=17)
 
 addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.pack()
+addtowl_button.place(x=100,y=60)
 
 schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.pack()
+schd_button.place(x=250,y=60)
 
 quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.pack()
+quit_button.place(x=400,y=60)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=10, width=60)
-tb.textBox.pack()
+tb.textBox.place(x=30,y=100)
 
 load_watchlist()
 
