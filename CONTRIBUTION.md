@@ -1,4 +1,4 @@
-# Contributing to ResourcePolice
+# Contributing to NoSpoilers
 Welcome! Thank you for showing interest in this repo! These are some rules that you must follow to contribute to this repo:
 
 ## Contributing Rules
