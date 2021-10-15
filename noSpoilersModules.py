@@ -4,7 +4,7 @@ All functions defined for the specific task is featured here
 '''
 
 import pandas as pd
-import requests
+import requests as rq
 
 def inputQuery(query):
         '''
@@ -15,7 +15,7 @@ def inputQuery(query):
             'x-rapidapi-key': "c130b92fbamsh3611aaa6003b0fep1c9b82jsnf0c2faa52da9",
             'x-rapidapi-host': "tvjan-tvmaze-v1.p.rapidapi.com"
             }
-        response = requests.request('GET', url, headers=headers)
+        response = rq.request('GET', url, headers=headers)
         lst = response.text.split('"')
         return lst
 
@@ -81,9 +81,9 @@ def schd():
             'x-rapidapi-key': "c130b92fbamsh3611aaa6003b0fep1c9b82jsnf0c2faa52da9",
             'x-rapidapi-host': "tvjan-tvmaze-v1.p.rapidapi.com"
         }
-        response1 = requests.request('GET', up_url, headers=headers)
+        response1 = rq.request('GET', up_url, headers=headers)
         fin = response1.text.split('"')
         if search.res1[0] in fin:
-            print('yesssssss')
+            print('Yesssssss')
         else:
             print('Nope')

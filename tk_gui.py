@@ -129,24 +129,23 @@ label.grid(row=3,column=3)
 query = StringVar()
 
 entry = Entry(master, textvariable=query)
-entry.grid(row=4,column=3)
+entry.grid(row=4,column=3,sticky='ew')
 
 search_button = Button(master, text='Search', command = search)
-search_button.grid(row =5, column = 3)
+search_button.grid(row =4, column = 4,sticky='w')
 
 addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.grid(row = 20, column = 3)
-
+addtowl_button.grid(row = 6, column = 3, sticky='ew')
 schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.grid(row = 21, column = 3)
+schd_button.grid(row = 6, column = 4,sticky='w')
 
 quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.grid(row = 25, column = 3)
+quit_button.grid(row = 30, column = 3,sticky='s')
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=10, width=60)
-tb.textBox.grid(row = 7, column = 3)
+tb.textBox.grid(row = 25, column = 3,columnspan=1,rowspan=1)
 
 load_watchlist()
 
