@@ -115,19 +115,19 @@ def load_watchlist():
 def show_about():
         window=Tk()
         window.title('About')
-        window.resizeab
-        window.config(padx = 10, pady = 10)
+        window.resizable(height = False, width = False)
+        # window.config(padx = 10, pady = 10)
         window.geometry("600x400")
         # lbl=Label(window, text="No Spoilers is a simple GUI TV show search engine. \nUsers can search and store TV shows in watchlists as well as get\n updates on new episodes of a certain show.", font = ("Courier", 9))
         # lbl.place(x=70, y=20)   
         html_label=HTMLLabel(window, html="""
                 <a href='https://github.com/AdithyaPadmashali/NoSpoilers'>NoSpoilers</a><br>
-
+                __________________________________________________
+                <p></p>
                 A simple GUI TV show search engine. <br>
                 Users can search and store TV shows in watchlists as well as get<br>
                 updates on new episodes of a certain show.
 
-                <img src = ''>
         """)
         html_label.place(x = 10, y = 10)
 
