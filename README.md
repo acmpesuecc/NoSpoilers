@@ -5,6 +5,7 @@ No Spoilers is a simple GUI TV show search engine. Users can search and store TV
 - pandas
 - requests
 - prettytable
+- fuzzywuzzy
 
 You can install these requirements by running `pip install -r requirement.txt` on your terminal or command prompt. Make sure to be in the cloned directory before installing. 
 
