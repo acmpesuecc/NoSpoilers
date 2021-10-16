@@ -84,7 +84,7 @@ def open_top():
                 textBox1.insert(END, filtered_table)
         def search_update():
                 s = searchbar.get()
-                if not s.isalnum():
+                if s.isspace():
                         clear()
                         print("whitespaces entered")
                         return
@@ -110,7 +110,7 @@ def open_top():
                 res = process.extract(s, shows)
                 print(res)
                 for i in res:
-                        if i[1] > 70:
+                        if i[1] >= 70:
                                 name  = i[0]
                                 for row in rows:
                                         if name in row:
