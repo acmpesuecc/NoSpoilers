@@ -112,6 +112,18 @@ def load_watchlist():
                 a = x.split(', ')
                 mytable.add_row(a)
 
+def about_NS():
+        info = Toplevel(master)
+        info.geometry('500x200')
+        info.title("About NS")
+
+        with open("AboutNS.txt") as f:
+                text = f.readlines()
+        t = Text(info)
+        t.pack()  
+        t.insert(END, ''.join(text))      
+        info.mainloop()
+
 menubar = Menu(master)
 
 wList = Menu(menubar, tearoff=0)
@@ -120,7 +132,7 @@ wList.add_command(label = 'Open watchlist', command = open_top)
 
 help = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Help', menu = help)
-help.add_command(label = 'About NS', command = None)
+help.add_command(label = 'About NS', command = about_NS)
 
 label = Label(master, text='Enter the name of the show',bg='#222',fg='white',font=("Poppins Bold",13))
 label.pack()
