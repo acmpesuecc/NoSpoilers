@@ -29,8 +29,31 @@ def splitID(a):
             temp.pop(-1)
             a = ''.join(temp)
             return a
+
         except IndexError:
             raise Exception('Something went wrong!')
+
+
+def addData_ppl(a, fl):
+    '''
+    This function is used to add certain data to a dataframe and display it for the actor
+    '''
+    try:
+        global df
+        fl = [a]
+        df = pd.DataFrame(fl, columns=['Name of the Actor', 'ID', 'Country', 'Birthday', 'Gender'], index=[1])
+        return df
+    except ValueError:
+        print('Something went wrong!')
+
+
+def call_ppl(a):
+    '''
+    This function is to call addData function fr the actor
+    '''
+    global name, new_id, country, birthday, gender, fl
+    fl = []
+    return addData_ppl(a, fl)
 
 def addData(a, fl):
         '''
@@ -52,6 +75,26 @@ def call(a):
         fl = []
         return addData(a, fl)
 
+
+def scrape_ppl(a):
+    '''
+    This function is used to scrape and parse the crude data output from API
+    '''
+
+
+
+    try:
+        scrape.id = a[6]
+        scrape.name = a[13]
+        scrape.country = a[19]
+        scrape.birthday = a[31]
+        scrape.gender=a[37]
+    except IndexError:
+        print('Something went wrong!')
+
+    return scrape.name, scrape.id, scrape.country, scrape.birthday, scrape.gender
+
+
 def scrape(a):
         '''
         This function is used to scrape and parse the crude data output from API
@@ -72,18 +115,19 @@ def scrape(a):
 
         return scrape.name, scrape.id, scrape.lang, scrape.gen, scrape.stat
 
-def schd():
-        '''
-        This function is used to check schedule
-        '''
-        up_url = 'http://api.tvmaze.com/schedule/web?country=US'
-        headers = {
-            'x-rapidapi-key': "c130b92fbamsh3611aaa6003b0fep1c9b82jsnf0c2faa52da9",
-            'x-rapidapi-host': "tvjan-tvmaze-v1.p.rapidapi.com"
-        }
-        response1 = requests.request('GET', up_url, headers=headers)
-        fin = response1.text.split('"')
-        if search.res1[0] in fin:
-            print('yesssssss')
-        else:
-            print('Nope')
+
+def ppl_search(people):
+    '''
+            This function is used to take input for the API call for searching for actor
+            '''
+    url = f" https://api.tvmaze.com/search/people?q={people}"
+    headers = {
+        'x-rapidapi-key': "c130b92fbamsh3611aaa6003b0fep1c9b82jsnf0c2faa52da9",
+        'x-rapidapi-host': "tvjan-tvmaze-v1.p.rapidapi.com"
+    }
+    response = requests.request('GET', url, headers=headers)
+    lst = response.text.split('"')
+    return lst
+
+
+

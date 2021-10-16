@@ -13,6 +13,27 @@ x_cord = int((screen_width / 2) - (550 / 2))  # lines 12 & 13 determine the cent
 y_cord = int((screen_height / 2) - (300 / 2))
 master.geometry(f"550x300+{x_cord}+{y_cord}")  # ensures the window pops up in the exact centre of the screen
 
+def search_actor():
+        #executed when the search button of the search actor/actress window in clicked
+        ppl=actor_query.get()
+        res=nsm.ppl_search(ppl)
+        try:
+                res1 = list(nsm.scrape_ppl(res))
+        except Exception:
+                messagebox.showerror('Error', 'No actor/actress found')
+
+        if len(res) == 0 or len(res) == 1:
+                raise Exception('Insufficient data')
+
+        new_id = nsm.splitID(res1[1])
+        temp = res1[2:5]
+        search.res2 = [res1[0], new_id]
+        for i in range(len(temp)):
+                search.res2.append(temp[i])
+        res3 = nsm.call_ppl(search.res2)
+        tb_actor(res3)
+
+
 def search():
         '''
         This function is to search and display TV shows
@@ -71,6 +92,40 @@ def tb(a):
         '''
         tb.textBox.delete(1.0, END)
         tb.textBox.insert(END, a)
+
+
+def tb_actor(a):
+        '''
+        This function is to clear and insert a new data of actor
+        '''
+        tb_actor.textBox2.delete(1.0, END)
+        tb_actor.textBox2.insert(END, a)
+
+
+def open_search_ppl():
+        '''
+        This function is to display Search Actor
+        '''
+        global actor_query,textbox2
+        actor_top = Toplevel(master)
+        actor_top.geometry("550x300")
+        actor_top.title('Search Actor/Actress')
+        actor_top.configure(bg='light pink')
+        label = Label(actor_top,bg='light pink', text='Enter the name of the Actor/Actress')
+        label.place(x=50, y=5)
+
+        actor_query = StringVar()
+
+        entry = Entry(actor_top, textvariable=actor_query, width=30)
+        entry.place(x=280, y=5)
+
+        search_button = Button(actor_top, text='Search', command=search_actor)
+        search_button.place(x=450, y=30)
+        tb_actor.textBox2 = Text(actor_top, height=10, width=60)
+        tb_actor.textBox2.place(x=40,y=70)
+
+
+        actor_top.mainloop()
 
 def open_top():
         '''
@@ -177,13 +232,17 @@ search_button = Button(master, text='Search', command = search)
 search_button.place(x=450,y=17)
 
 addtowl_button = Button(master, text='Add to watchlist', command = search_again)
-addtowl_button.place(x=100,y=60)
+addtowl_button.place(x=50,y=60)
 
 schd_button = Button(master, text='Save watchlist', command = watchlist_save)
-schd_button.place(x=250,y=60)
+schd_button.place(x=180,y=60)
 
-quit_button = Button(master, text='Quit', command = quit_ns)
-quit_button.place(x=400,y=60)
+search_actor_button = Button(master, text='Search Actor', command = open_search_ppl)
+search_actor_button.place(x=320,y=60)
+
+
+quit_button = Button(master, text='Quit',bg='red', command = quit_ns)
+quit_button.place(x=470,y=60)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
