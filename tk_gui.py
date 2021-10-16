@@ -89,7 +89,7 @@ def watchlist_save():
         '''
         file = open('wlist.txt', 'w')  #changed from a+ to w, so that the existing entries are not duplicated
         for i in main_wl_list:
-                file.write(', '.join(i) + '\n')
+                file.write('\\ '.join(i) + '\n')
         file.close()
         messagebox.showwarning('Saved', 'Watchlist is saved!')
 
@@ -110,7 +110,7 @@ def load_watchlist():
         file = open('wlist.txt', 'r')
         for x in file:
                 temp = x.split('\n')  #remove the trailing newline if it exists
-                a = temp[0].split(', ')
+                a = temp[0].split('\\ ')
                 mytable.add_row(a)
                 main_wl_list.append(a)  # this will load the saved watchlist as the program begins
 
