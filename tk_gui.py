@@ -134,11 +134,18 @@ def aboutns():
 
     newWin.title("About NS")
 
-    newWin.geometry("250x250")#dimensions of help window
+    newWin.geometry("350x350")#dimensions of help window
 
     text = Text(newWin,wrap=WORD, bg='red', fg='white')#setting color of box and text
 
-    text.insert(INSERT,"NS stands for NoSpoilers and it is a program which is made by incorporating tkinter using python.No Spoilers is a simple GUI TV show search engine. Users can search and store TV shows in watchlists as well as get updates on new episodes of a certain show.")#command to put in the box
+    text.insert(INSERT,"""NS stands for NoSpoilers and it is a program which is made by incorporating tkinter.
+    The tkinter package (“Tk interface”) is the standard Python interface to the Tcl/Tk GUI toolkit. 
+    Both Tk and tkinter are available on most Unix platforms, including macOS, as well as on Windows systems.
+    This framework provides Python users with a simple way to create GUI elements using the widgets found in the Tk toolkit.
+    We have used tkinter to provide the user with an interactive GUI and also beacuse of its capability to run on multiple OS without any hassle.
+    This project also implements pandas for data manipulation,analysis and prettytable for generating simple ASCII tables.
+    No Spoilers is a simple GUI TV show search engine. Users can search and store TV shows in watchlists as well as get updates on new episodes of a certain show.The User can use the program by Entering the name of the show and click on search. 
+    The user can then either add the show to his watchlist or he can save it to his watchlist or he can quit the program by pressing the 'QUIT' button """)#command to put in the box
     text.pack()
     newWin.mainloop()
 help = Menu(menubar, tearoff=0)
