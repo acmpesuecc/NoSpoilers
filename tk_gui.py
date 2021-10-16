@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 from tkinter import *
 from tkinter import messagebox
 import noSpoilersModules as nsm
+import os
 
 master = Tk()
 master.title("No Spoilers")
@@ -46,7 +47,7 @@ def search_again():
         search()
         try:
                 if search.res2 in main_wl_list:
-                        raise Exception('Error: show already in watchlist')
+                        raise Exception("Error: show already in watchlist")
                 else:
                         main_wl_list.append(search.res2)
                         mytable.add_row(search.res2)
@@ -72,6 +73,8 @@ def open_top():
         '''
         This function is to display the watchlist
         '''
+
+        load_watchlist()
         top = Toplevel(master)
         top.geometry("525x500")
         top.title('Watchlist')
@@ -92,6 +95,7 @@ def watchlist_save():
                 file.write(', '.join(i) + '\n')
         file.close()
         messagebox.showwarning('Saved', 'Watchlist is saved!')
+        
 
 def quit_ns():
         '''
@@ -107,13 +111,48 @@ def load_watchlist():
         '''
         This function is to load the saved watchlist everytime the application is opened
         '''
+        mytable.clear()
         file = open('wlist.txt', 'r')
         for x in file:
                 a = x.split(', ')
                 mytable.add_row(a)
 
-menubar = Menu(master)
+def edit_watchlist():
+        
+        '''
+        Used to remove a show from the watchlist
+        '''
+        global mystring
+        a=mystring.get()
+        with open("wlist.txt") as file:
+                
+                data=file.readlines()
+                file.close
+        if(a==''):
+                messagebox.showerror("Error", "Please enter the name of a show!")
+                raise Exception("Please enter the name of a show!")
+        try:
+                f=open("temp.txt","a")
+                flag=0
+                for i in data:
+                        list=i.split(',')
+                        if(list[0]!=a):
+                                        f.write(i)
+                        else:
+                                flag=1
+                f.close()
+                if(flag==0):
+                        os.remove("temp.txt")
+                        messagebox.showwarning("Oops", "This show doesn't exist on your watchlist")
+                        raise Exception("Show doesn't exist on watchlist")
+                else:
+                        os.remove("wlist.txt")
+                        os.rename("temp.txt","wlist.txt")
+        finally:
+                f.close()
 
+menubar = Menu(master)
+mystring =StringVar(master)
 wList = Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Watchlist', menu = wList)
 wList.add_command(label = 'Open watchlist', command = open_top)
@@ -140,8 +179,17 @@ addtowl_button.place(x=20,y=280)
 schd_button = Button(master, text='Save watchlist', command = watchlist_save,bg='#6ea3ba',fg='black',font=('Poppins',10))
 schd_button.place(x=150,y=280)
 
+e1 = Entry(master, width=25,textvariable= mystring,bg='white',fg='black')
+e1.place(x=295,y=280)
+
+edit_button = Button(master, text='Edit watchlist', command = edit_watchlist,bg='#6ea3ba',fg='black',font=('Poppins',10))
+edit_button.place(x=490,y=280)
+
+label2 = Label(master, text='Enter the name of the show to remove',bg='#222',fg='white',font=("Poppins Bold",13))
+label2.place(x=300,y=305)
+
 quit_button = Button(master,width=5, text='Quit', command = quit_ns, bg='#ff1f48',fg='white',font=('Poppins',10,'bold'))
-quit_button.place(x=540,y=330)
+quit_button.place(x=540,y=335)
 
 mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
