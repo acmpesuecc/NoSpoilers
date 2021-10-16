@@ -145,7 +145,7 @@ def watchlist_save():
 
         file = open('wlist.txt', 'a+')
         for i in main_wl_list[savedupto:]:
-                file.write(', '.join(i) + '\n')
+                file.write('| '.join(i) + '\n')
         file.close()
         savedupto = len(main_wl_list)
         messagebox.showwarning('Saved', 'Watchlist is saved!')
@@ -166,7 +166,7 @@ def load_watchlist():
         '''
         file = open('wlist.txt', 'r')
         for x in file:
-                a = x.split(', ')
+                a = x.split('| ')
                 mytable.add_row(a)
 
 menubar = Menu(master)
