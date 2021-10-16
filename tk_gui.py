@@ -127,6 +127,18 @@ def show_about():
                 A simple GUI TV show search engine. <br>
                 Users can search and store TV shows in watchlists as well as get<br>
                 updates on new episodes of a certain show.
+                <h6> Explore our features</h6>
+                <br><ul>
+                <li>Search for the details of any TV show</li>
+                <li>Create a watchlist</li>
+                <li>Save the watchlist to a file in your local storage</li>
+                </ul>
+                <br>
+                <div align = 'center'>
+                For more information regarding the API we use:<br>
+                <a href='https://www.tvmaze.com/api'>https://www.tvmaze.com/api</a><br>
+                <a href='https://rapidapi.com/tvjan/api/tvmaze'>RapidAPI</a><br></div>
+                
 
         """)
         html_label.place(x = 10, y = 10)
