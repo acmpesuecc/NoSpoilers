@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 from tkinter import *
 from tkinter import messagebox
 import noSpoilersModules as nsm
+import mysql.connector
 
 master = Tk()
 master.title("No Spoilers")
@@ -87,10 +88,29 @@ def watchlist_save():
         '''
         This function is to save the watchlist data
         '''
-        file = open('wlist.txt', 'w')  #changed from a+ to w, so that the existing entries are not duplicated
-        for i in main_wl_list:
+        if isDB == False:
+            file = open('wlist.txt', 'w')  #changed from a+ to w, so that the existing entries are not duplicated
+            for i in main_wl_list:
                 file.write(', '.join(i) + '\n')
-        file.close()
+            file.close()
+        else:
+            f = mysql.connector.connect(host = "localhost", user = "root", passwd = "", database = "NoSpoilers")
+            mycur = f.cursor()
+            mycur.execute("use NoSpoilers;")
+            mycur.execute("select * from watch;")
+            dat = mycur.fetchall()
+            tmp_wl_list = []
+            for line in dat:
+                tmp_wl_list.append(list(line))
+            print(tmp_wl_list)
+            mycur.close()
+            mycur = f.cursor()
+            for i in main_wl_list:
+                if not i in tmp_wl_list:
+                    mycur.execute("insert into watch(NameOfTheShow, ID, Language, Genre, Status)values('{}','{}','{}','{}','{}')".format(i[0], i[1], i[2], i[3], i[4]))
+            f.commit()
+            mycur.close()
+            f.close()
         messagebox.showwarning('Saved', 'Watchlist is saved!')
 
 def quit_ns():
@@ -107,12 +127,24 @@ def load_watchlist():
         '''
         This function is to load the saved watchlist everytime the application is opened
         '''
-        file = open('wlist.txt', 'r')
-        for x in file:
-                temp = x.split('\n')  #remove the trailing newline if it exists
-                a = temp[0].split(', ')
-                mytable.add_row(a)
-                main_wl_list.append(a)  # this will load the saved watchlist as the program begins
+        if isDB == False:
+            file = open('wlist.txt', 'r')
+            for x in file:
+                    temp = x.split('\n')  #remove the trailing newline if it exists
+                    a = temp[0].split(', ')
+                    mytable.add_row(a)
+                    main_wl_list.append(a)  # this will load the saved watchlist as the program begins
+        else:
+                f = mysql.connector.connect(host = "localhost", user = "root", passwd = "", database = "NoSpoilers")
+                mycur = f.cursor()
+                mycur.execute("use NoSpoilers;")
+                mycur.execute("select * from watch;")
+                dat = mycur.fetchall()
+                for line in dat:
+                        mytable.add_row(line)
+                        main_wl_list.append(list(line))
+                mycur.close()
+
 
 menubar = Menu(master)
 
@@ -130,6 +162,7 @@ label.pack()
 query = StringVar()
 
 entry = Entry(master,width=40, textvariable=query,bg='#444',fg='white')
+
 entry.place(x=180,y=30)
 
 search_button = Button(master, text='Search', command = search ,bg='#6ea3ba',fg='black',font=('Poppins',10))
@@ -149,6 +182,8 @@ mytable = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
 
 tb.textBox = Text(master, height=10, width=72,bg='#444',fg='white')
 tb.textBox.place(x=10,y=70)
+
+isDB = True
 
 load_watchlist()
 
