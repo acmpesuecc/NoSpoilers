@@ -82,7 +82,6 @@ def scrape_ppl(a):
     '''
 
 
-
     try:
         scrape.id = a[6]
         scrape.name = a[13]

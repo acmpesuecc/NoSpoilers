@@ -18,20 +18,22 @@ def search_actor():
         ppl=actor_query.get()
         res=nsm.ppl_search(ppl)
         try:
+                if len(res) == 0 or len(res) == 1:
+                        messagebox.showerror('Error','Insufficient data!')
                 res1 = list(nsm.scrape_ppl(res))
+                new_id = nsm.splitID(res1[1])
+                temp = res1[2:5]
+                search.res2 = [res1[0], new_id]
+                for i in range(len(temp)):
+                        search.res2.append(temp[i])
+                res3 = nsm.call_ppl(search.res2)
+                tb_actor(res3)
+
         except Exception:
                 messagebox.showerror('Error', 'No actor/actress found')
 
-        if len(res) == 0 or len(res) == 1:
-                raise Exception('Insufficient data')
 
-        new_id = nsm.splitID(res1[1])
-        temp = res1[2:5]
-        search.res2 = [res1[0], new_id]
-        for i in range(len(temp)):
-                search.res2.append(temp[i])
-        res3 = nsm.call_ppl(search.res2)
-        tb_actor(res3)
+
 
 
 def search():
@@ -49,20 +51,21 @@ def search():
 
         try:
                 res1 = list(nsm.scrape(res))
+                if len(res1) == 0 or len(res1) == 1:
+                        raise Exception('No data receieved for the given show')
+
+                new_id = nsm.splitID(res1[1])
+                temp = res1[2:5]
+
+                search.res2 = [res1[0], new_id]
+                for i in range(len(temp)):
+                        search.res2.append(temp[i])
+                res3 = nsm.call(search.res2)
+                tb(res3)
+
         except Exception:
                 messagebox.showerror('Error', 'No data receieved for the given show')
 
-        if len(res1) == 0 or len(res1) == 1:
-                raise Exception('No data receieved for the given show')
-
-        new_id = nsm.splitID(res1[1])
-        temp = res1[2:5]
-
-        search.res2 = [res1[0], new_id]
-        for i in range(len(temp)):
-                search.res2.append(temp[i])
-        res3 = nsm.call(search.res2)
-        tb(res3)
 
 def search_again():
         '''
