@@ -182,6 +182,7 @@ help.add_command(label = 'About NS', command = None)
 label = Label(master, text='Enter the name of the show',bg='#222',fg='white',font=("Poppins Bold",13))
 label.pack()
 
+master.bind('<Return>', lambda x: search())
 query = StringVar()
 
 entry = Entry(master,width=40, textvariable=query,bg='#444',fg='white')
