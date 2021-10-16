@@ -4,3 +4,11 @@ easier
 You can search for series, create and manage watchlists, 
 and get timely updates on all new episodes of all your 
 favourite series
+
+You can search for any Series you like, and add them to
+your watchlist using the "Add to watchlist" button.
+You can view your watchlist at any time at 
+Watchlist> Open watchlist from the menubar.
+
+Use the "Save watchlist" button to save your watchlist
+so it persists even if u exit the program and come back :)

@@ -114,7 +114,7 @@ def load_watchlist():
 
 def about_NS():
         info = Toplevel(master)
-        info.geometry('500x200')
+        info.geometry('500x300')
         info.title("About NS")
 
         with open("AboutNS.txt") as f:
