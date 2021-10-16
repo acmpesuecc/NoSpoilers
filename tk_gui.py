@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 from tkinter import *
 from tkinter import messagebox
 import noSpoilersModules as nsm
+from fuzzywuzzy import process, fuzz
 
 master = Tk()
 master.title("No Spoilers")
@@ -74,13 +75,65 @@ def open_top():
         This function is to display the watchlist
         '''
         top = Toplevel(master)
-        top.geometry("525x500")
+        top.geometry("700x500")
         top.title('Watchlist')
 
-        textBox1 = Text(top, height=30, width=70)
-        textBox1.pack()
+        def clear():
+                filtered_table = mytable
+                textBox1.delete('1.0', END)
+                textBox1.insert(END, filtered_table)
+        def search_update():
+                s = searchbar.get()
+                if not s.isalnum():
+                        clear()
+                        print("whitespaces entered")
+                        return
 
-        textBox1.insert(END, mytable)
+                shows=[]
+                rows=[]
+                for row in mytable:
+                        row.border = False
+                        row.header = False
+                        name = row.get_string(fields=["Name of the show"]).strip()
+                        shows.append(name)
+                        row_l = [
+                                name,
+                                row.get_string(fields=['ID']).strip(),
+                                row.get_string(fields=['Langauge']).strip(),
+                                row.get_string(fields=['Genre']).strip(),
+                                row.get_string(fields=['Status']).strip()
+                        ]
+                        rows.append(row_l)
+
+                filtered_table = PrettyTable(['Name of the show', 'ID', 'Langauge', 'Genre', 'Status'])
+
+                res = process.extract(s, shows)
+                print(res)
+                for i in res:
+                        if i[1] > 70:
+                                name  = i[0]
+                                for row in rows:
+                                        if name in row:
+                                                filtered_table.add_row(row)
+                textBox1.delete('1.0', END)
+                textBox1.insert(END, filtered_table)                                
+
+        search_str = StringVar()
+        #search_str.trace_add("write", search_update)
+
+        search_lbl = Label(top, text="Search: ").grid(row=0, column=0, sticky='E')
+        searchbar = Entry(top, textvariable=search_str, width=40)
+        searchbar.grid(row=0, column=1,)
+        search_but = Button(top, text="Search", command=search_update)
+        search_but.grid(row=0, column=2, sticky='W')
+        clear_but = Button(top, text="Clear", command=clear)
+        clear_but.grid(row=0, column=3, sticky='W')
+
+        textBox1 = Text(top, height=30, width=100)
+        textBox1.grid(row=1, column=0, columnspan=10)
+
+        filtered_table = mytable
+        textBox1.insert(END, filtered_table)
 
         top.mainloop()
 
