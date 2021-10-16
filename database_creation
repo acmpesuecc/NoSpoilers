@@ -1,0 +1,20 @@
+import mysql.connector
+
+# Create the database
+
+f = mysql.connector.connect(host = "localhost", user = "root", passwd = "")
+mycur = f.cursor()
+mycur.execute("create database NoSpoilers;")
+f.commit()
+f.close()
+mycur.close()
+
+# Create the table watch
+
+f = mysql.connector.connect(host = "localhost", user = "root", passwd = "", database = "NoSpoilers")
+mycur = f.cursor()
+mycur.execute("use NoSpoilers;")
+mycur.execute("create table watch(NameOfTheShow varchar(50), ID varchar(10), Language varchar(30), Genre varchar(20), Status varchar(20));")
+f.commit()
+
+print("done")
