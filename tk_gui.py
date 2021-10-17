@@ -41,13 +41,26 @@ def search():
         res3 = nsm.call(search.res2)
         tb(res3)
 
+def get_all_ids():
+        '''
+        This function is used to get a list of IDs from the watchlist
+        '''
+        ids = []
+        for row in mytable:
+            row.border = False
+            row.header = False
+            show_id = row.get_string(fields=["ID"]).strip()
+            ids.append(show_id)
+        return ids
+
 def search_again():
         '''
         This function is used to add the search data to the watchlist
         '''
         search()
         try:
-                if search.res2 in main_wl_list:
+                wl_ids = get_all_ids()
+                if search.res2[1] in wl_ids:
                         raise Exception('Error: show already in watchlist')
                 else:
                         main_wl_list.append(search.res2)
