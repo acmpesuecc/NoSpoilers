@@ -6,13 +6,15 @@ All functions defined for the specific task is featured here
 import pandas as pd
 import requests
 
+API_TOKEN = "c130b92fbamsh3611aaa6003b0fep1c9b82jsnf0c2faa52da9"
+
 def inputQuery(query):
         '''
         This function is used to take input for the API call
         '''
         url = f"https://tvjan-tvmaze-v1.p.rapidapi.com/search/shows?q={query}"
         headers = {
-            'x-rapidapi-key': "c130b92fbamsh3611aaa6003b0fep1c9b82jsnf0c2faa52da9",
+            'x-rapidapi-key': API_TOKEN,
             'x-rapidapi-host': "tvjan-tvmaze-v1.p.rapidapi.com"
             }
         response = requests.request('GET', url, headers=headers)
@@ -78,7 +80,7 @@ def schd():
         '''
         up_url = 'http://api.tvmaze.com/schedule/web?country=US'
         headers = {
-            'x-rapidapi-key': "c130b92fbamsh3611aaa6003b0fep1c9b82jsnf0c2faa52da9",
+            'x-rapidapi-key': API_TOKEN,
             'x-rapidapi-host': "tvjan-tvmaze-v1.p.rapidapi.com"
         }
         response1 = requests.request('GET', up_url, headers=headers)
